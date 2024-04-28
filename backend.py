@@ -68,7 +68,7 @@ class Predictor:
                 self.numbers.append(number)
 
             # номера военных формата 0052 со 05
-            elif re.match(r'd{4}\D{2}\d{2,3}', number) is not None:
+            elif re.match(r'\d{4}\D{2}\d{2,3}', number) is not None:
                 self.numbers.append(number)
 
         return self.numbers
