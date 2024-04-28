@@ -9,7 +9,7 @@ vid = "rtsp://admin:Admin123@192.168.10.100:554/11"
 
 def main():
 
-    results = model(vid, stream=True, conf=0.6, classes=[0,1])
+    results = model(vid, stream=True, device='cuda:0', conf=0.6, classes=[0,1])
 
     for result in results:
 
@@ -26,12 +26,13 @@ def main():
 
         cv.putText(frame, FPS, (5, 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv.LINE_AA)
         cv.imshow("frame", frame)
-
-
+        print(numbers)
         if len(numbers) == 0:
-            break
+            pass
+
+        else:
+            save_carplate(numbers, result.frame)
         #если номера найдены
-        save_carplate(numbers, result.frame)
 
         if cv.waitKey(33) & 0xFF == ord('q'):
             sys.exit()
